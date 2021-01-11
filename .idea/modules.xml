@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/io.szrharrison.MKVEditor/io.szrharrison.MKVEditor.iml" filepath="$PROJECT_DIR$/io.szrharrison.MKVEditor/io.szrharrison.MKVEditor.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/mkv-editor.iml" filepath="$PROJECT_DIR$/.idea/mkv-editor.iml" />
+    </modules>
+  </component>
+</project>
