@@ -34,7 +34,7 @@ public class FileChooserButton extends Button {
   }
 
 
-  private EventHandler<ActionEvent> makeOnClickHandler() {
+  public EventHandler<ActionEvent> makeOnClickHandler() {
     return (ActionEvent event) -> {
       selectedFile = fileChooser.showOpenDialog(stage);
       if (onChoose != null) {
@@ -44,6 +44,6 @@ public class FileChooserButton extends Button {
   }
 
   public interface FileHandler {
-    public void call(File file);
+    void call(File file);
   }
 }
