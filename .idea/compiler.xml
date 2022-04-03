@@ -7,11 +7,17 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="io.szrharrison.MKVEditor" />
+        <module name="mkv-editor" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="io.szrharrison.MKVEditor" target="13" />
+      <module name="mkv-editor" target="13" />
     </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="mkv-editor" options="-parameters" />
+    </option>
   </component>
 </project>
