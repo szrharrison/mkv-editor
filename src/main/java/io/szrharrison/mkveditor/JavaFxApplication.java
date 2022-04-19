@@ -1,14 +1,18 @@
 package io.szrharrison.mkveditor;
 
-import io.szrharrison.mkveditor.video_player.MediaPlayer;
-import io.szrharrison.mkveditor.video_player.control_bar.VideoBar;
+import io.szrharrison.mkveditor.components.video_player.MediaPlayer;
+import io.szrharrison.mkveditor.components.video_player.control_bar.VideoBar;
+import io.szrharrison.mkveditor.services.MkvReader;
 import javafx.application.Application;
 import javafx.application.HostServices;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import lombok.Getter;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -40,7 +44,7 @@ public class JavaFxApplication extends Application {
 
   @Override
   public void start(Stage primaryStage) {
-    var root = new StackPane();
+    var root = new BorderPane();
     this.context.publishEvent(new StageReadyEvent(primaryStage, root));
     initUI(primaryStage, root);
   }
@@ -52,43 +56,41 @@ public class JavaFxApplication extends Application {
     Platform.exit();
   }
 
-  private void initUI(Stage stage, StackPane root) {
-
+  private void initUI(Stage stage, BorderPane root) {
     MenuItem openMenuItem = new MenuItem("Open");
     Menu fileMenu = new Menu("File");
     MenuBar menu = new MenuBar();
 
     fileMenu.getItems().add(openMenuItem);
     menu.getMenus().add(fileMenu);
+    FileChooser fileChooser = new FileChooser();
 
-    var button = new FileChooserButton("Select a video", stage);
-    button.setOnChoose((File file) -> {
-      if (file != null) {
-        mediaPlayer.init(file.getAbsolutePath());
-        root.getChildren().remove(button);
+    openMenuItem.setOnAction((ActionEvent event) -> {
+      File selectedFile = fileChooser.showOpenDialog(stage);
+      if (selectedFile != null) {
+        mediaPlayer.init(selectedFile.getAbsolutePath());
       }
     });
 
-    openMenuItem.setOnAction(button.makeOnClickHandler());
-
     mediaPlayer = new MediaPlayer(
+        (MkvReader) context.getBean("mkvReader"),
         (MediaPlayerFactory) context.getBean("mediaPlayerFactory"),
         (EmbeddedMediaPlayer) context.getBean("mediaPlayer"),
         (VideoBar) context.getBean("videoBar")
     );
-    mediaPlayer.setTop(menu);
-    root.getChildren().add(mediaPlayer);
+    root.setTop(menu);
+    root.setCenter(mediaPlayer);
   }
 
   static class StageReadyEvent extends ApplicationEvent {
     @Getter
-    private final StackPane root;
+    private final Pane root;
 
     public Stage getStage() {
       return (Stage) getSource();
     }
 
-    public StageReadyEvent(Object source, StackPane root) {
+    public StageReadyEvent(Object source, Pane root) {
       super(source);
       this.root = root;
     }

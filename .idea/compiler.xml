@@ -12,7 +12,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="io.szrharrison.MKVEditor" target="13" />
-      <module name="mkv-editor" target="13" />
+      <module name="mkv-editor" target="17" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

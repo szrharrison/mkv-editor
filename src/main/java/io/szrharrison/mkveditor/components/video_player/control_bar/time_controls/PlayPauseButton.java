@@ -1,8 +1,8 @@
-package io.szrharrison.mkveditor.video_player.control_bar.time_controls;
+package io.szrharrison.mkveditor.components.video_player.control_bar.time_controls;
 
+import io.szrharrison.mkveditor.components.UnfocusableButton;
 import io.szrharrison.mkveditor.models.FontAwesomeGlyphs;
 import javafx.application.Platform;
-import javafx.scene.control.Button;
 import org.controlsfx.glyphfont.Glyph;
 import org.controlsfx.glyphfont.GlyphFont;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +11,7 @@ import uk.co.caprica.vlcj.player.base.MediaPlayer;
 import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
 
 @Service
-public class PlayPauseButton extends Button {
+public class PlayPauseButton extends UnfocusableButton {
   private final MediaPlayer mediaPlayer;
   private PlayPauseButton.Status status;
   private final Glyph playArrow;

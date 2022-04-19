@@ -1,4 +1,4 @@
-package io.szrharrison.mkveditor.video_player.control_bar.volume_controller;
+package io.szrharrison.mkveditor.components.video_player.control_bar.volume_controller;
 
 import javafx.scene.control.Slider;
 import org.springframework.beans.factory.annotation.Autowired;

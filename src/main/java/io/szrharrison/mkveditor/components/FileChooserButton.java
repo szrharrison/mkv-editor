@@ -1,4 +1,4 @@
-package io.szrharrison.mkveditor;
+package io.szrharrison.mkveditor.components;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

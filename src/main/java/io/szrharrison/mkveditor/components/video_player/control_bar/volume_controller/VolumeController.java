@@ -1,4 +1,4 @@
-package io.szrharrison.mkveditor.video_player.control_bar.volume_controller;
+package io.szrharrison.mkveditor.components.video_player.control_bar.volume_controller;
 
 import io.szrharrison.mkveditor.models.FontAwesomeGlyphs;
 import javafx.geometry.Pos;

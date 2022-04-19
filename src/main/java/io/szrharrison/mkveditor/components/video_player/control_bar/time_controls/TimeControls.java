@@ -1,4 +1,4 @@
-package io.szrharrison.mkveditor.video_player.control_bar.time_controls;
+package io.szrharrison.mkveditor.components.video_player.control_bar.time_controls;
 
 import javafx.scene.layout.HBox;
 import org.springframework.beans.factory.annotation.Autowired;

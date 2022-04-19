@@ -1,4 +1,4 @@
-package io.szrharrison.mkveditor.video_player.control_bar.timeline_controller;
+package io.szrharrison.mkveditor.components.video_player.control_bar.timeline_controller;
 
 import io.szrharrison.mkveditor.models.Time;
 import javafx.application.Platform;

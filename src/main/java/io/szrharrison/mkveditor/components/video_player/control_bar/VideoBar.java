@@ -1,8 +1,8 @@
-package io.szrharrison.mkveditor.video_player.control_bar;
+package io.szrharrison.mkveditor.components.video_player.control_bar;
 
-import io.szrharrison.mkveditor.video_player.control_bar.time_controls.TimeControls;
-import io.szrharrison.mkveditor.video_player.control_bar.timeline_controller.TimelineController;
-import io.szrharrison.mkveditor.video_player.control_bar.volume_controller.VolumeController;
+import io.szrharrison.mkveditor.components.video_player.control_bar.time_controls.TimeControls;
+import io.szrharrison.mkveditor.components.video_player.control_bar.timeline_controller.TimelineController;
+import io.szrharrison.mkveditor.components.video_player.control_bar.volume_controller.VolumeController;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.*;
