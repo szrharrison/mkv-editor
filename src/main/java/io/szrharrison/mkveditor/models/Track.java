@@ -2,6 +2,7 @@ package io.szrharrison.mkveditor.models;
 
 import com.neovisionaries.i18n.LanguageAlpha3Code;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.util.Locale;
@@ -11,6 +12,7 @@ import static io.szrharrison.mkveditor.models.Flag.FALSE;
 import static io.szrharrison.mkveditor.models.Flag.TRUE;
 
 @Getter
+@Builder
 @AllArgsConstructor
 public class Track {
   public static Track fromNode(Node trackNode) {

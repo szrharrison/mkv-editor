@@ -1,6 +1,6 @@
 package io.szrharrison.mkveditor.services;
 
-import io.szrharrison.mkveditor.models.MkvInfo;
+import io.szrharrison.mkveditor.models.Node;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -11,14 +11,14 @@ import java.io.IOException;
 public class MkvReader {
   private final MkvInfoCommander mkvInfoCommander;
 
-  public void read(String mkvFilePath) {
+  public Node read(String mkvFilePath) {
+    Node info = null;
     try {
-      MkvInfo info = mkvInfoCommander.run(mkvFilePath);
-      if (!info.getTags().isEmpty()) {
-        System.out.println("Language: " + info.getTracks().get(0).getLanguage());
-      }
+       info = mkvInfoCommander.run(mkvFilePath);
     } catch (IOException e) {
       e.printStackTrace();
     }
+
+    return info;
   }
 }

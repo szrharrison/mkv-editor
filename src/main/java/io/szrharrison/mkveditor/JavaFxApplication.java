@@ -1,5 +1,6 @@
 package io.szrharrison.mkveditor;
 
+import io.szrharrison.mkveditor.components.MediaInfo;
 import io.szrharrison.mkveditor.components.video_player.MediaPlayer;
 import io.szrharrison.mkveditor.components.video_player.control_bar.VideoBar;
 import io.szrharrison.mkveditor.services.MkvReader;
@@ -12,6 +13,8 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import lombok.Getter;
@@ -28,6 +31,7 @@ import java.io.File;
 public class JavaFxApplication extends Application {
   private ConfigurableApplicationContext context;
   private MediaPlayer mediaPlayer;
+  private MediaInfo mediaInfo;
 
   @Override
   public void init() {
@@ -69,17 +73,27 @@ public class JavaFxApplication extends Application {
       File selectedFile = fileChooser.showOpenDialog(stage);
       if (selectedFile != null) {
         mediaPlayer.init(selectedFile.getAbsolutePath());
+        mediaInfo.loadFile(selectedFile.getAbsolutePath());
       }
     });
 
+    VBox vBox = new VBox();
+
     mediaPlayer = new MediaPlayer(
-        (MkvReader) context.getBean("mkvReader"),
         (MediaPlayerFactory) context.getBean("mediaPlayerFactory"),
         (EmbeddedMediaPlayer) context.getBean("mediaPlayer"),
         (VideoBar) context.getBean("videoBar")
     );
+    mediaInfo = new MediaInfo(
+        (MkvReader) context.getBean("mkvReader")
+    );
+
+    vBox.getChildren().add(mediaPlayer);
+    VBox.setVgrow(mediaPlayer, Priority.ALWAYS);
+    vBox.getChildren().add(mediaInfo);
+
     root.setTop(menu);
-    root.setCenter(mediaPlayer);
+    root.setCenter(vBox);
   }
 
   static class StageReadyEvent extends ApplicationEvent {

@@ -1,29 +1,23 @@
 package io.szrharrison.mkveditor.services;
 
-import io.szrharrison.mkveditor.models.*;
+import io.szrharrison.mkveditor.models.Node;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.List;
-import java.util.Optional;
 import java.util.Scanner;
-import java.util.logging.Level;
-
-import static java.util.Collections.emptyList;
 
 @Log
 @Service
 public class MkvInfoCommander {
   private final ProcessBuilder processBuilder = new ProcessBuilder("mkvinfo");
 
-  public MkvInfo run(String fileLocation) throws IOException {
+  public Node run(String fileLocation) throws IOException {
     processBuilder.command("mkvinfo", fileLocation);
     Process process = processBuilder.start();
     InputStream inputStream = process.getInputStream();
     Scanner scanner = new Scanner(inputStream).useDelimiter("\n");
-    StringBuilder stringBuilder = new StringBuilder();
     Node root = new Node("File", fileLocation);
     Node current = root;
     Integer lastLevel = -1;
@@ -65,27 +59,10 @@ public class MkvInfoCommander {
         current = newNode;
       }
       lastLevel = level;
-
-      stringBuilder.append('\n');
-      stringBuilder.append(line);
     }
 
-    String results = stringBuilder.toString();
-    log.info( results);
-    log.info( root.toString());
-
-    final List<Track> tracks = root.get("Segment").get("Tracks").getChildren().stream().map(Track::fromNode).toList();
-    final List<Tag> tags = Optional.ofNullable(root.get("Segment").get("Tags"))
-        .map(Node::getChildren)
-        .map(Nodes::stream)
-        .map(stream -> stream.map(Tag::fromNode).toList())
-        .orElse(emptyList());
-    return new MkvInfo(
-        root.get("Segment").get("Segment information").get("Segment UID").getValue(),
-        Time.valueOf(root.get("Segment").get("Segment information").get("Duration").getValue()),
-        tracks,
-        tags
-    );
+    log.info("\n" + root);
+    return root;
   }
 
   private Integer getLevel(String line) {

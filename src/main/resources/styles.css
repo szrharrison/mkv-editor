@@ -1,3 +1,19 @@
 .button:focused {
     -fx-background-insets: 0, 0, 1, 2;
 }
+
+.Field-label {
+    -fx-text-fill: inherit;
+}
+
+.Field-input {
+    -fx-text-fill: inherit;
+    -fx-background-color: -fx-text-box-border, #333;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-background-radius: 0;
+}
+
+.Field-input:focused {
+    -fx-background-color: -fx-focus-color, derive(#333, 10%);
+    -fx-background-insests: 0, 0 0 1.5 0;
+}

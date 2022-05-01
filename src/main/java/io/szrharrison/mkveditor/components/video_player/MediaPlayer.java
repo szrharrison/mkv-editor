@@ -1,6 +1,7 @@
 package io.szrharrison.mkveditor.components.video_player;
 
 import io.szrharrison.mkveditor.components.video_player.control_bar.VideoBar;
+import io.szrharrison.mkveditor.models.Node;
 import io.szrharrison.mkveditor.services.MkvInfoCommander;
 import io.szrharrison.mkveditor.services.MkvReader;
 import javafx.scene.image.ImageView;
@@ -12,6 +13,8 @@ import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import static uk.co.caprica.vlcj.javafx.videosurface.ImageViewVideoSurfaceFactory.videoSurfaceForImageView;
 
@@ -19,16 +22,13 @@ import static uk.co.caprica.vlcj.javafx.videosurface.ImageViewVideoSurfaceFactor
 public class MediaPlayer extends BorderPane {
   private final EmbeddedMediaPlayer mediaPlayer;
   private final MediaPlayerFactory mediaPlayerFactory;
-  private final MkvReader mkvReader;
 
   @Autowired
   public MediaPlayer(
-      MkvReader mkvReader,
       MediaPlayerFactory mediaPlayerFactory,
       EmbeddedMediaPlayer mediaPlayer,
       VideoBar videoBar
   ) {
-    this.mkvReader = mkvReader;
     this.mediaPlayerFactory = mediaPlayerFactory;
     this.mediaPlayer = mediaPlayer;
 
@@ -40,6 +40,7 @@ public class MediaPlayer extends BorderPane {
     videoImageView.fitHeightProperty().bind(mediaPane.heightProperty());
     mediaPane.getChildren().add(videoImageView);
     setCenter(mediaPane);
+    setMinHeight(200d);
 
     mediaPlayer.videoSurface().set(videoSurfaceForImageView(videoImageView));
 
@@ -49,7 +50,6 @@ public class MediaPlayer extends BorderPane {
 
   public final void init(String videoMRL) {
     mediaPlayer.media().prepare(videoMRL);
-    mkvReader.read(videoMRL);
   }
 
   public final void stop() {

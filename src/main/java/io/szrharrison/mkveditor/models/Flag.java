@@ -6,20 +6,28 @@ import java.util.Objects;
 
 @Getter
 public enum Flag {
-  TRUE(1),
-  FALSE(0);
+  TRUE(true),
+  FALSE(false);
 
-  private final int value;
+  private final Boolean value;
 
-  Flag(int value) {
+  Flag(boolean value) {
     this.value = value;
+  }
+
+  public static Flag valueOf(Boolean value) {
+    if (value) {
+      return TRUE;
+    } else {
+      return FALSE;
+    }
   }
 
   public static Flag fromString(String flag) {
     flag = flag.trim();
-    if (Objects.equals(flag, "true") || Objects.equals(flag, "1")) {
+    if (Objects.equals(flag.toLowerCase(), "true") || Objects.equals(flag, "1")) {
       return TRUE;
-    } else if (Objects.equals(flag, "false") || Objects.equals(flag, "0")) {
+    } else if (Objects.equals(flag.toLowerCase(), "false") || Objects.equals(flag, "0")) {
       return FALSE;
     } else {
       return null;
