@@ -1,6 +1,8 @@
-package io.szrharrison.mkveditor.models;
+package io.szrharrison.mkveditor.models.track;
 
 import com.neovisionaries.i18n.LanguageAlpha3Code;
+import io.szrharrison.mkveditor.models.Flag;
+import io.szrharrison.mkveditor.models.Node;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -24,15 +26,15 @@ public class Track {
           trackNode.get("Track UID").getValue(),
           track_type,
           TRUE,
+          Flag.fromString(trackNode.get("\"Default track\" flag").getValue()),
+          Flag.fromString(trackNode.get("\"Forced display\" flag").getValue()),
           FALSE,
           FALSE,
           FALSE,
           FALSE,
           FALSE,
-          FALSE,
-          FALSE,
-          Flag.fromString(Optional.ofNullable(trackNode.get("\"Lacing\" flag")).map(Node::getValue).orElse("0")),
-          null,
+          Flag.fromString(trackNode.get("\"Lacing\" flag").getValue()),
+          trackNode.get("Name").getValue(),
           LanguageAlpha3Code.getByCodeIgnoreCase(trackNode.get("Language").getValue()),
           null,
           trackNode.get("Codec ID").getValue(),
@@ -50,15 +52,15 @@ public class Track {
           trackNode.get("Track UID").getValue(),
           track_type,
           TRUE,
-          FALSE,
-          FALSE,
+          Flag.fromString(trackNode.get("\"Default track\" flag").getValue()),
+          Flag.fromString(trackNode.get("\"Forced display\" flag").getValue()),
           FALSE,
           FALSE,
           FALSE,
           FALSE,
           FALSE,
           Flag.fromString(Optional.ofNullable(trackNode.get("\"Lacing\" flag")).map(Node::getValue).orElse("0")),
-          null,
+          trackNode.get("Name").getValue(),
           LanguageAlpha3Code.getByCodeIgnoreCase(Optional.ofNullable(trackNode.get("Language")).map(Node::getValue).orElse("und")),
           null,
           trackNode.get("Codec ID").getValue()

@@ -5,6 +5,7 @@ import lombok.Getter;
 import java.util.List;
 
 public class Node {
+  private static final Node empty = new Node(null, null);
   @Getter
   private final String key;
   @Getter
@@ -36,11 +37,11 @@ public class Node {
         if (children.get(key).listIterator().hasNext()) {
           return children.get(key).listIterator().next();
         } else {
-          return null;
+          return empty;
         }
       }
     } else {
-      return null;
+      return empty;
     }
   }
 

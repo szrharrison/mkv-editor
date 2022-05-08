@@ -1,16 +1,19 @@
 package io.szrharrison.mkveditor.models;
 
+import org.springframework.lang.NonNull;
+
+import java.util.Comparator;
 import java.util.List;
 
 import static java.util.Arrays.asList;
 import static java.util.Collections.reverse;
 
-public class Time implements Cloneable {
+public class Time implements Cloneable, Comparable<Time> {
   private final StringBuilder stringBuilder = new StringBuilder();
   private long milliseconds;
 
   public static Time valueOf(String input) {
-    if (input.contains(":")) {
+    if (input != null && input.contains(":")) {
       List<String> timePieces = asList(input.split(":"));
       reverse(timePieces);
       long milliseconds = 0;
@@ -134,5 +137,12 @@ public class Time implements Cloneable {
     final String string = stringBuilder.toString();
     stringBuilder.setLength(0);
     return string;
+  }
+
+  private static final Comparator<Time> comparator = Comparator.comparingLong(Time::inMilliseconds);
+
+  @Override
+  public int compareTo(@NonNull Time time) {
+    return comparator.compare(this, time);
   }
 }

@@ -1,5 +1,7 @@
 package io.szrharrison.mkveditor.models;
 
+import io.szrharrison.mkveditor.models.chapter.Edition;
+import io.szrharrison.mkveditor.models.track.Track;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -18,6 +20,7 @@ public class MkvInfo {
   private final Time duration;
   private final List<Track> tracks;
   private final List<Tag> tags;
+  private final List<Edition> editions;
 
   public static MkvInfo fromNode(Node node) {
     final List<Track> tracks = node.get("Segment").get("Tracks").getChildren().stream().map(Track::fromNode).toList();
@@ -26,12 +29,14 @@ public class MkvInfo {
         .map(Nodes::stream)
         .map(stream -> stream.map(Tag::fromNode).toList())
         .orElse(emptyList());
+    final List<Edition> editions = node.get("Segment").get("Chapters").getChildren().stream().map(Edition::fromNode).toList();
     return new MkvInfo(
         node.get("Segment").get("Segment information").get("Segment UID").getValue(),
         node.get("Segment").get("Segment information").get("Title").getValue(),
         Time.valueOf(node.get("Segment").get("Segment information").get("Duration").getValue()),
         tracks,
-        tags
+        tags,
+        editions
     );
   }
 }

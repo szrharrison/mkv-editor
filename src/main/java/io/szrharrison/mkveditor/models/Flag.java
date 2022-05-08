@@ -24,11 +24,15 @@ public enum Flag {
   }
 
   public static Flag fromString(String flag) {
-    flag = flag.trim();
-    if (Objects.equals(flag.toLowerCase(), "true") || Objects.equals(flag, "1")) {
-      return TRUE;
-    } else if (Objects.equals(flag.toLowerCase(), "false") || Objects.equals(flag, "0")) {
-      return FALSE;
+    if (flag != null) {
+      flag = flag.trim();
+      if (Objects.equals(flag.toLowerCase(), "true") || Objects.equals(flag, "1")) {
+        return TRUE;
+      } else if (Objects.equals(flag.toLowerCase(), "false") || Objects.equals(flag, "0")) {
+        return FALSE;
+      } else {
+        return null;
+      }
     } else {
       return null;
     }

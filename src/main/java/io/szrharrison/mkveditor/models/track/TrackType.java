@@ -1,4 +1,4 @@
-package io.szrharrison.mkveditor.models;
+package io.szrharrison.mkveditor.models.track;
 
 import lombok.Getter;
 

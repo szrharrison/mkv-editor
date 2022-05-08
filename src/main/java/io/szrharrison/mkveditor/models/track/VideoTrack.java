@@ -1,6 +1,7 @@
-package io.szrharrison.mkveditor.models;
+package io.szrharrison.mkveditor.models.track;
 
 import com.neovisionaries.i18n.LanguageAlpha3Code;
+import io.szrharrison.mkveditor.models.Flag;
 
 import java.util.Locale;
 

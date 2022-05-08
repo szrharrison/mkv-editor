@@ -10,7 +10,9 @@ public class Checkbox extends GridPane {
   public Checkbox(String label, Boolean initialValue) {
     checkBox = new CheckBox(label);
     checkBox.setStyle("-fx-text-fill: inherit;");
-    checkBox.setSelected(initialValue);
+    if (initialValue != null) {
+      checkBox.setSelected(initialValue);
+    }
     add(checkBox, 0, 0);
     setPadding(new Insets(0, 10, 10, 0));
   }

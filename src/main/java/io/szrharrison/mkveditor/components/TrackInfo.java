@@ -3,7 +3,7 @@ package io.szrharrison.mkveditor.components;
 
 import com.neovisionaries.i18n.LanguageAlpha3Code;
 import io.szrharrison.mkveditor.models.Flag;
-import io.szrharrison.mkveditor.models.Track;
+import io.szrharrison.mkveditor.models.track.Track;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,6 +12,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 
 import java.util.Locale;
+import java.util.Optional;
 
 public class TrackInfo extends HBox {
   private final Track track;
@@ -37,8 +38,8 @@ public class TrackInfo extends HBox {
     GridPane gridPane = new GridPane();
     gridPane.setAlignment(Pos.CENTER_LEFT);
     Field nameField = new Field("name", track.getName());
-    Checkbox isDefaultField = new Checkbox("default", track.getIsDefault().getValue());
-    Checkbox isEnabledField = new Checkbox("enabled", track.getEnabled().getValue());
+    Checkbox isDefaultField = new Checkbox("default", Optional.ofNullable(track.getIsDefault()).map(Flag::getValue).orElse(null));
+    Checkbox isEnabledField = new Checkbox("enabled", Optional.ofNullable(track.getEnabled()).map(Flag::getValue).orElse(null));
     SelectField<LanguageAlpha3Code> languageField = new SelectField<>(
         "language",
         track.getLanguage(),
